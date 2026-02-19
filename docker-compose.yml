@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - previews_data:/usr/share/nginx/previews:ro
+    depends_on:
+      - webhook-receiver
+    restart: unless-stopped
+
+  webhook-receiver:
+    build: ./webhook-receiver
+    env_file: .env
+    volumes:
+      - db_data:/app/db
+    expose:
+      - '3000'
+    restart: unless-stopped
+
+  claude-runner:
+    build: ./claude-runner
+    env_file: .env
+    volumes:
+      - db_data:/app/db
+      - projects_data:/app/projects
+      - previews_data:/app/previews
+    expose:
+      - '3001'
+    depends_on:
+      - webhook-receiver
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  projects_data:
+  previews_data:

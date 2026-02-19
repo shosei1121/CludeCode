@@ -1,0 +1,21 @@
+{
+  "name": "freelance-auto-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "node tests/unit/lineHandler.test.js && node tests/unit/jobQueue.test.js && node tests/unit/db.test.js",
+    "test:integration": "node tests/integration/webhook.test.js",
+    "simulate:new": "node tests/e2e/line-simulate.js new",
+    "simulate:fb": "node tests/e2e/line-simulate.js fb",
+    "simulate:status": "node tests/e2e/line-simulate.js status",
+    "simulate:health": "node tests/e2e/line-simulate.js health",
+    "check-db": "node tests/e2e/check-db.js",
+    "install:all": "npm install && cd webhook-receiver && npm install && cd ../claude-runner && npm install"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-sqlite3-wasm": "^0.8.53",
+    "uuid": "^9.0.1"
+  }
+}

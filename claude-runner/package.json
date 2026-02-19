@@ -1,0 +1,19 @@
+{
+  "name": "claude-runner",
+  "version": "1.0.0",
+  "main": "src/runner.js",
+  "scripts": {
+    "start": "node src/runner.js",
+    "dev": "nodemon src/runner.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@octokit/rest": "^21.0.2",
+    "dotenv": "^16.4.5",
+    "uuid": "^9.0.1",
+    "node-sqlite3-wasm": "^0.8.53"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
